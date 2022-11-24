@@ -2,15 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/primaryColor">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <RelativeLayout
                 android:id="@+id/rl1"
@@ -25,19 +26,23 @@
                     android:text="@string/add_card"
                     android:textColor="@color/black"
                     android:textSize="34sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 <ImageButton
-                    android:id="@+id/btn_filter"
+                    android:id="@+id/btn_return"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_alignParentRight="true" />
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/return_arrow"
+                    android:background="@null"
+                    android:scaleType="fitCenter"
+                    android:padding="4dp"/>
 
                 <View
                     android:id="@+id/view_name"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:layout_below="@id/btn_filter"
+                    android:layout_below="@id/btn_return"
                     android:background="@color/black" />
 
             </RelativeLayout>
@@ -70,7 +75,8 @@
                 android:hint="Enter name"
                 android:padding="10dp"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:inputType="text"/>
 
             <TextView
                 android:id="@+id/tv_cost"
@@ -97,9 +103,11 @@
                 android:elevation="10dp"
                 android:fontFamily="@font/magic"
                 android:hint="Enter mana cost"
+                android:inputType="number"
                 android:padding="10dp"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:maxLength="2"/>
 
             <LinearLayout
                 android:id="@+id/ll2"
@@ -139,7 +147,10 @@
                         android:hint="Enter power"
                         android:padding="10dp"
                         android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:layout_marginBottom="15dp"
+                        android:inputType="number"
+                        android:maxLength="2"/>
 
                 </RelativeLayout>
 
@@ -166,13 +177,16 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_toughness"
                         android:layout_centerInParent="true"
+                        android:layout_marginBottom="15dp"
                         android:background="@drawable/input_field"
                         android:elevation="10dp"
                         android:fontFamily="@font/magic"
                         android:hint="Enter toughness"
                         android:padding="10dp"
                         android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:inputType="number"
+                        android:maxLength="2"/>
 
                 </RelativeLayout>
 
@@ -185,7 +199,7 @@
                 android:layout_below="@+id/ll2"
                 android:layout_alignStart="@+id/spinner_type"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/magic"
                 android:text="Type"
                 android:textColor="@color/black"
@@ -228,6 +242,37 @@
                 android:popupBackground="@drawable/input_field"
                 android:popupElevation="10dp" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_picture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_color"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/input_field"
+                android:fontFamily="@font/magic"
+                android:text="Add image"
+                android:textAllCaps="false"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_picture"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/input_field"
+                android:fontFamily="@font/magic"
+                android:text="Add card"
+                android:textAllCaps="false"
+                android:textSize="24sp"
+                android:textStyle="bold"/>
 
         </RelativeLayout>
 
