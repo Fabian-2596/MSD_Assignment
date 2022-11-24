@@ -54,5 +54,23 @@ public class Card {
         return this.image;
     }
 
+    public enum type {
+        Land,
+        Creature,
+        Artifact,
+        Enchantment,
+        Planeswalker,
+        Spell,
+        Instant,
+        Sorcery;
+    }
+
+    public enum color {
+        Black,
+        White,
+        Red,
+        Blue,
+        Green;
+    }
 
 }

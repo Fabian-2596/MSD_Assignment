@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MTG Collection</string>
+    <string name="cards">Cards</string>
+    <string name="decks">Decks</string>
+    <string name="add_card">Add Card</string>
+    <string name="name">Name</string>
+    <string name="mana_cost">Mana cost</string>
 </resources>
