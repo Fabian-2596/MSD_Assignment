@@ -12,8 +12,7 @@ public class Card {
 
     public Card(){}
 
-    public Card(int id, String n, int c, int p, int t, String type, String color, byte[] i){
-        this.id = id;
+    public Card(String n, int c, int p, int t, String type, String color, byte[] i){
         this.name = n;
         this.cost = c;
         this.power = p;

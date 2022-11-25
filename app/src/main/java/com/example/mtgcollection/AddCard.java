@@ -3,14 +3,15 @@ package com.example.mtgcollection;
 import static java.util.stream.Collectors.toList;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -18,28 +19,32 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.app.ActivityOptionsCompat;
+import androidx.appcompat.widget.AppCompatSpinner;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 public class AddCard extends AppCompatActivity {
 
-
-    EditText et_name = findViewById(R.id.et_name);
-    EditText et_cost = findViewById(R.id.et_cost);
-    EditText et_power = findViewById(R.id.et_power);
-    EditText et_toughness = findViewById(R.id.et_toughness);
-    Spinner spn_type = findViewById(R.id.spinner_type);
-    Spinner spn_color = findViewById(R.id.spinner_color);
-    Button btn_image = findViewById(R.id.btn_picture);
-    Button btn_submit = findViewById(R.id.btn_submit);
-    ImageButton btn_return = findViewById(R.id.btn_return);
+    private byte[] image;
+    CardDatabaseManager cdm = new CardDatabaseManager(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_card);
+
+        EditText et_name = findViewById(R.id.et_name);
+        EditText et_cost = findViewById(R.id.et_cost);
+        EditText et_power = findViewById(R.id.et_power);
+        EditText et_toughness = findViewById(R.id.et_toughness);
+        AppCompatSpinner spn_type = findViewById(R.id.spinner_type);
+        AppCompatSpinner spn_color = findViewById(R.id.spinner_color);
+        AppCompatButton btn_image = findViewById(R.id.btn_picture);
+        AppCompatButton btn_submit = findViewById(R.id.btn_submit);
+        ImageButton btn_return = findViewById(R.id.btn_return);
 
         List<String> types = Arrays.stream(Card.type.values())
                 .map(Enum::toString)
@@ -62,7 +67,17 @@ public class AddCard extends AppCompatActivity {
                 new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-
+                        if (result != null) {
+                            Uri imageUri = result.getData().getData();
+                            try {
+                                Bitmap img = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                                img.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                                image = stream.toByteArray();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
                 }
         );
@@ -70,25 +85,27 @@ public class AddCard extends AppCompatActivity {
         btn_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                Intent photoPickerIntent = new Intent();
                 photoPickerIntent.setType("image/*");
+                photoPickerIntent.setAction(Intent.ACTION_GET_CONTENT);
                 imagePickerActivityResult.launch(photoPickerIntent);
             }
-
         });
-
-
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                et_name.getText().toString();
-                et_cost.getText().toString();
-                et_power.getText().toString();
-                et_toughness.getText().toString();
-                spn_type.getSelectedItem().toString();
-                spn_color.getSelectedItem().toString();
-                //TODO add to database
+
+                Card card = new Card(et_name.getText().toString(), Integer.parseInt(et_cost.getText().toString()), Integer.parseInt(et_power.getText().toString()), Integer.parseInt(et_toughness.getText().toString()),
+                        spn_type.getSelectedItem().toString(), spn_color.getSelectedItem().toString(), image);
+                cdm.open();
+                cdm.addCard(card);
+                cdm.close();
+
+                Toast toast = Toast.makeText(getApplicationContext(), et_name.getText().toString() + " added", Toast.LENGTH_SHORT);
+                toast.show();
+                Intent cardList = new Intent(AddCard.this, MainActivity.class);
+                startActivity(cardList);
             }
         });
 
@@ -98,6 +115,5 @@ public class AddCard extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 }

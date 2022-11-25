@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/primaryColor">
 
     <RelativeLayout
         android:id="@+id/rl1"
@@ -9,7 +10,7 @@
         android:layout_height="wrap_content">
 
         <ImageButton
-            android:id="@+id/btn_return"
+            android:id="@+id/btn_filter"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentLeft="true"/>
@@ -23,7 +24,7 @@
             android:textColor="@color/black"/>
 
         <ImageButton
-            android:id="@+id/btn_filter"
+            android:id="@+id/btn_add"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentRight="true"/>
@@ -37,10 +38,13 @@
     </RelativeLayout>
 
     <ListView
+        android:id="@+id/lv_cards"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/rl1"
-        android:layout_above="@id/ll1"/>
+        android:layout_above="@id/ll1"
+        android:divider="@color/black"
+        android:dividerHeight="1dp"/>
 
     <LinearLayout
         android:id="@+id/ll1"

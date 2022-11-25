@@ -7,8 +7,8 @@ public class Deck {
 
     public Deck(){}
 
-    public Deck(int id, String n){
-        this.id = id;
+
+    public Deck(String n){
         this.name = n;
 
     }
