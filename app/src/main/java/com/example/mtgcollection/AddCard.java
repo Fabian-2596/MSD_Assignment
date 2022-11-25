@@ -2,6 +2,8 @@ package com.example.mtgcollection;
 
 import static java.util.stream.Collectors.toList;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,13 +12,19 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityOptionsCompat;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class AddCard extends AppCompatActivity {
+
 
     EditText et_name = findViewById(R.id.et_name);
     EditText et_cost = findViewById(R.id.et_cost);
@@ -48,6 +56,27 @@ public class AddCard extends AppCompatActivity {
         ArrayAdapter<String> colorAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, colors);
         colorAdapter.setDropDownViewResource(R.layout.spinner_item);
         spn_color.setAdapter(colorAdapter);
+
+        //https://stackoverflow.com/questions/38352148/get-image-from-the-gallery-and-show-in-imageview
+        ActivityResultLauncher<Intent> imagePickerActivityResult = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+
+                    }
+                }
+        );
+
+        btn_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                photoPickerIntent.setType("image/*");
+                imagePickerActivityResult.launch(photoPickerIntent);
+            }
+
+        });
+
 
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
