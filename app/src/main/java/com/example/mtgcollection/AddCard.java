@@ -10,7 +10,6 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -64,7 +63,7 @@ public class AddCard extends AppCompatActivity {
         colorAdapter.setDropDownViewResource(R.layout.spinner_item);
         spn_color.setAdapter(colorAdapter);
 
-        //https://stackoverflow.com/questions/38352148/get-image-from-the-gallery-and-show-in-imageview
+        //Image picker from https://stackoverflow.com/questions/38352148/get-image-from-the-gallery-and-show-in-imageview
         ActivityResultLauncher<Intent> imagePickerActivityResult = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
                     @Override
@@ -100,7 +99,7 @@ public class AddCard extends AppCompatActivity {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = et_name.getText().toString() ;
+                String name = et_name.getText().toString();
                 String type = spn_type.getSelectedItem().toString();
                 String color = spn_color.getSelectedItem().toString();
 
@@ -109,8 +108,7 @@ public class AddCard extends AppCompatActivity {
                     int power = Integer.parseInt(et_power.getText().toString());
                     int toughness = Integer.parseInt(et_toughness.getText().toString());
 
-                    Card card = new Card(name, cost, power, toughness, type
-                            , color, image);
+                    Card card = new Card(name, cost, power, toughness, type, color, image);
 
                     cdm.open();
                     cdm.addCard(card);

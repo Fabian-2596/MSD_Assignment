@@ -1,39 +1,33 @@
 package com.example.mtgcollection;
 
 
-import static com.example.mtgcollection.CardDatabaseHelper.KEY_ID;
 import static com.example.mtgcollection.CardDatabaseHelper.KEY_IMAGE;
 import static com.example.mtgcollection.CardDatabaseHelper.KEY_NAME;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-
 
 public class AllCards extends AppCompatActivity {
 
-    CardDatabaseManager cdm = new CardDatabaseManager(this);
-    byte [] image;
+
+    byte[] image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.card_list);
 
+        CardDatabaseManager cdm = new CardDatabaseManager(this);
         ListView lv_cards = findViewById(R.id.lv_cards);
 
         cdm.open();
@@ -66,6 +60,15 @@ public class AllCards extends AppCompatActivity {
                 Intent addCard = new Intent(AllCards.this, AddCard.class);
                 startActivity(addCard);
                 finish();
+            }
+        });
+
+        AppCompatButton btn_decks = findViewById(R.id.btn_decks);
+        btn_decks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent decks = new Intent(AllCards.this, AllDecks.class);
+                startActivity(decks);
             }
         });
     }

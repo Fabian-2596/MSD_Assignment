@@ -10,9 +10,10 @@ public class Card {
     private String color;
     byte[] image;
 
-    public Card(){}
+    public Card() {
+    }
 
-    public Card(String n, int c, int p, int t, String type, String color, byte[] i){
+    public Card(String n, int c, int p, int t, String type, String color, byte[] i) {
         this.name = n;
         this.cost = c;
         this.power = p;
@@ -22,35 +23,35 @@ public class Card {
         this.image = i;
     }
 
-    public int getId(){
+    public int getId() {
         return this.id;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
-    public int getCost(){
+    public int getCost() {
         return this.cost;
     }
 
-    public int getPower(){
+    public int getPower() {
         return this.power;
     }
 
-    public int getToughness(){
+    public int getToughness() {
         return this.toughness;
     }
 
-    public String getType(){
+    public String getType() {
         return this.type;
     }
 
-    public String getColor(){
+    public String getColor() {
         return this.color;
     }
 
-    public byte[] getImage(){
+    public byte[] getImage() {
         return this.image;
     }
 

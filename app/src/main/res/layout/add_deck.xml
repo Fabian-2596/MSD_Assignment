@@ -24,7 +24,7 @@
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/planewalker"
                     android:text="@string/add_deck"
-                    android:textColor="@color/black"
+                    android:textColor="@color/textColor"
                     android:textSize="34sp"
                     android:textStyle="bold" />
 
@@ -32,7 +32,16 @@
                     android:id="@+id/btn_return"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_alignParentRight="true" />
+                    android:layout_alignParentRight="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/back"
+                    android:background="@drawable/button_background"
+                    android:elevation="10dp"
+                    android:padding="10dp"
+                    android:scaleType="fitCenter"/>
 
                 <View
                     android:id="@+id/view_name"
@@ -54,7 +63,7 @@
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/planewalker"
                 android:text="@string/name"
-                android:textColor="@color/black"
+                android:textColor="@color/textColor"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -81,6 +90,7 @@
                 android:layout_marginTop="60dp"
                 android:background="@drawable/input_field"
                 android:fontFamily="@font/planewalker"
+                android:textColor="@color/textColor"
                 android:text="Add deck"
                 android:textAllCaps="false"
                 android:textSize="24sp"

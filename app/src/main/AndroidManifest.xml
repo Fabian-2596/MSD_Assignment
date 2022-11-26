@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -30,12 +30,17 @@
 
         <activity
             android:name=".AddCard"
-            android:label="add card">
-        </activity>
+            android:label="add card"></activity>
         <activity
             android:name=".CardClicked"
-            android:label="card clicked">
-        </activity>
+            android:label="card clicked"></activity>
+        <activity
+            android:name=".AllDecks"
+            android:label="all decks"></activity>
+        <activity
+            android:name=".AddDeck"
+            android:label="add deck"></activity>
+
     </application>
 
 </manifest>

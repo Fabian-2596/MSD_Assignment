@@ -3,9 +3,9 @@ package com.example.mtgcollection;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,9 +46,10 @@ public class CardClicked extends AppCompatActivity {
                 cdm.close();
                 Intent cardList = new Intent(CardClicked.this, AllCards.class);
                 startActivity(cardList);
+                finish();
             }
         });
-        AppCompatButton btn_return = findViewById(R.id.btn_return);
+        ImageButton btn_return = findViewById(R.id.btn_return);
         btn_return.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
