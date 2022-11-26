@@ -58,6 +58,7 @@ import android.util.Log;
             values.put(KEY_IMAGE, card.getImage());
 
             database.insert(TABLE_CARD, null, values);
+
         }
 
         void addDeck(Deck deck) {

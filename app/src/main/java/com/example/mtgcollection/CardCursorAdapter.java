@@ -4,6 +4,8 @@ import static com.example.mtgcollection.CardDatabaseHelper.KEY_COLOR;
 import static com.example.mtgcollection.CardDatabaseHelper.KEY_COST;
 import static com.example.mtgcollection.CardDatabaseHelper.KEY_IMAGE;
 import static com.example.mtgcollection.CardDatabaseHelper.KEY_NAME;
+import static com.example.mtgcollection.CardDatabaseHelper.KEY_POWER;
+import static com.example.mtgcollection.CardDatabaseHelper.KEY_TOUGHNESS;
 import static com.example.mtgcollection.CardDatabaseHelper.KEY_TYPE;
 
 import android.content.Context;
@@ -45,14 +47,17 @@ public class CardCursorAdapter extends CursorAdapter {
         TextView tv_type = view.findViewById(R.id.tv_type);
         TextView tv_cost = view.findViewById(R.id.tv_cost);
         TextView tv_color = view.findViewById(R.id.tv_color);
+        TextView tv_power = view.findViewById(R.id.tv_power);
 
         String color = cursor.getString(cursor.getColumnIndexOrThrow(KEY_COLOR));
         String name = cursor.getString(cursor.getColumnIndexOrThrow(KEY_NAME));
         String type = cursor.getString(cursor.getColumnIndexOrThrow(KEY_TYPE));
         String cost = cursor.getString(cursor.getColumnIndexOrThrow(KEY_COST));
-        byte[] image = cursor.getBlob(cursor.getColumnIndexOrThrow(KEY_IMAGE));
+        String power = cursor.getString(cursor.getColumnIndexOrThrow(KEY_POWER));
+        String toughness = cursor.getString(cursor.getColumnIndexOrThrow(KEY_TOUGHNESS));
+        byte[] byteimage = cursor.getBlob(cursor.getColumnIndexOrThrow(KEY_IMAGE));
 
-        InputStream is = new ByteArrayInputStream(image);
+        InputStream is = new ByteArrayInputStream(byteimage);
         Bitmap bmpImage = BitmapFactory.decodeStream(is);
         iv_image.setImageBitmap(bmpImage);
 
@@ -71,6 +76,7 @@ public class CardCursorAdapter extends CursorAdapter {
         tv_type.setText(type);
         tv_cost.setText(cost);
         tv_color.setText(color);
+        tv_power.setText(power + "/" + toughness);
     }
 
 

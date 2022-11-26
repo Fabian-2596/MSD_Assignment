@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -35,7 +36,7 @@ public class AddCard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_card);
-
+        Intent cardList = new Intent(AddCard.this, AllCards.class);
         EditText et_name = findViewById(R.id.et_name);
         EditText et_cost = findViewById(R.id.et_cost);
         EditText et_power = findViewById(R.id.et_power);
@@ -44,7 +45,7 @@ public class AddCard extends AppCompatActivity {
         AppCompatSpinner spn_color = findViewById(R.id.spinner_color);
         AppCompatButton btn_image = findViewById(R.id.btn_picture);
         AppCompatButton btn_submit = findViewById(R.id.btn_submit);
-        ImageButton btn_return = findViewById(R.id.btn_return);
+        AppCompatButton btn_return = findViewById(R.id.btn_return);
 
         List<String> types = Arrays.stream(Card.type.values())
                 .map(Enum::toString)
@@ -67,13 +68,16 @@ public class AddCard extends AppCompatActivity {
                 new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
+                        ImageView iv_preview = findViewById(R.id.iv_preview);
                         if (result != null) {
                             Uri imageUri = result.getData().getData();
+                            iv_preview.setImageURI(imageUri);
                             try {
                                 Bitmap img = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
                                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                                 img.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                                 image = stream.toByteArray();
+                                
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -95,23 +99,38 @@ public class AddCard extends AppCompatActivity {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String name = et_name.getText().toString() ;
+                String type = spn_type.getSelectedItem().toString();
+                String color = spn_color.getSelectedItem().toString();
 
-                Card card = new Card(et_name.getText().toString(), Integer.parseInt(et_cost.getText().toString()), Integer.parseInt(et_power.getText().toString()), Integer.parseInt(et_toughness.getText().toString()),
-                        spn_type.getSelectedItem().toString(), spn_color.getSelectedItem().toString(), image);
-                cdm.open();
-                cdm.addCard(card);
-                cdm.close();
+                if(name != null && et_cost.getText().toString() != null && et_power.getText().toString() != null && et_toughness.getText().toString() != null && image != null) {
+                    int cost = Integer.parseInt(et_cost.getText().toString());
+                    int power = Integer.parseInt(et_power.getText().toString());
+                    int toughness = Integer.parseInt(et_toughness.getText().toString());
 
-                Toast toast = Toast.makeText(getApplicationContext(), et_name.getText().toString() + " added", Toast.LENGTH_SHORT);
-                toast.show();
-                Intent cardList = new Intent(AddCard.this, MainActivity.class);
-                startActivity(cardList);
+                    Card card = new Card(name, cost, power, toughness, type
+                            , color, image);
+
+                    cdm.open();
+                    cdm.addCard(card);
+                    cdm.close();
+
+                    startActivity(cardList);
+
+                    Toast success = Toast.makeText(getApplicationContext(), et_name.getText().toString() + " added", Toast.LENGTH_SHORT);
+                    success.show();
+                }
+                else {
+                    Toast fail = Toast.makeText(getApplicationContext(),  "Check if everything is filled in", Toast.LENGTH_SHORT);
+                    fail.show();
+                }
+
             }
         });
 
         btn_return.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
+                startActivity(cardList);
                 finish();
             }
         });

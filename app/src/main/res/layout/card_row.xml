@@ -17,7 +17,7 @@
         android:orientation="vertical">
 
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
@@ -27,11 +27,34 @@
                 android:text="Name"
                 android:gravity="center"
                 android:textSize="30sp"
-                android:fontFamily="@font/magic"
+                android:fontFamily="@font/planewalker"
                 android:textStyle="bold"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="5dp"/>
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/tv_cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="3dp"
+                android:layout_toLeftOf="@+id/tv_color"
+                android:fontFamily="@font/planewalker"
+                android:text="3"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="35sp"
+                android:text="="
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/magic"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="30dp" />
+
+        </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -45,29 +68,22 @@
                 android:text="Type"
                 android:gravity="center"
                 android:textSize="30sp"
-                android:fontFamily="@font/magic"
+                android:fontFamily="@font/planewalker"
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/tv_cost"
+                android:id="@+id/tv_power"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3"
+                android:text="4/4"
                 android:gravity="center"
-                android:textSize="40sp"
-                android:layout_toLeftOf="@+id/tv_color"
-                android:layout_marginEnd="3dp"
-                android:fontFamily="@font/magic"
+                android:layout_centerInParent="true"
+                android:textSize="30sp"
+                android:layout_marginEnd="30dp"
+                android:fontFamily="@font/planewalker"
+                android:layout_alignParentEnd="true"
                 android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/tv_color"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="40sp"
-                android:fontFamily="@font/magic"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="30dp" />
 
         </RelativeLayout>
 
