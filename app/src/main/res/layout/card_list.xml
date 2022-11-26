@@ -63,7 +63,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/rl1"
         android:layout_above="@id/ll1"
-        android:divider="@color/black"
+        android:divider="@color/textColor"
         android:dividerHeight="1dp"/>
 
     <LinearLayout

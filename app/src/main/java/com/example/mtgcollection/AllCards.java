@@ -1,12 +1,10 @@
 package com.example.mtgcollection;
 
-
 import static com.example.mtgcollection.CardDatabaseHelper.KEY_IMAGE;
 import static com.example.mtgcollection.CardDatabaseHelper.KEY_NAME;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,7 +13,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
-
 
 public class AllCards extends AppCompatActivity {
 

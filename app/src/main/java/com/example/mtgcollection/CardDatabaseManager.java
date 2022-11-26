@@ -143,6 +143,13 @@ import android.util.Log;
             database.close();
         }
 
+        public void deleteDeck(long id) {
+
+            database.delete(TABLE_DECK, KEY_ID + " = ?",
+                    new String[] { String.valueOf(id) });
+            database.close();
+        }
+
         public int getCardCount() {
             String countQuery = "SELECT  * FROM " + TABLE_CARD;
             Cursor cursor = database.rawQuery(countQuery, null);
