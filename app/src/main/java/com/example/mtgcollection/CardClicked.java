@@ -20,7 +20,7 @@ public class CardClicked extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.on_card);
-        Intent cardList = new Intent(CardClicked.this, AllCards.class);
+
         CardDatabaseManager cdm = new CardDatabaseManager(this);
 
         Intent i = getIntent();
@@ -44,6 +44,7 @@ public class CardClicked extends AppCompatActivity {
                 cdm.open();
                 cdm.deleteCard(id);
                 cdm.close();
+                Intent cardList = new Intent(CardClicked.this, AllCards.class);
                 startActivity(cardList);
             }
         });
@@ -51,7 +52,6 @@ public class CardClicked extends AppCompatActivity {
         btn_return.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(cardList);
                 finish();
             }
         });
