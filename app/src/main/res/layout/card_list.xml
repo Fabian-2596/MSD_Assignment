@@ -18,10 +18,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cards"
             android:layout_centerInParent="true"
-            android:textSize="28sp"
-            android:textColor="@color/black"/>
+            android:fontFamily="@font/planewalker"
+            android:text="@string/cards"
+            android:textColor="@color/textColor"
+            android:textSize="34sp"
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/btn_add"
@@ -61,8 +63,11 @@
             android:background="@null"
             android:outlineProvider="paddedBounds"
             android:text="@string/cards"
-            android:textSize="20sp"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:fontFamily="@font/planewalker"
+            android:textStyle="bold"
+            android:textColor="@color/textColor"
+            android:textSize="30sp"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_decks"
@@ -73,7 +78,10 @@
             android:textAllCaps="false"
             android:outlineProvider="paddedBounds"
             android:text="@string/decks"
-            android:textSize="20sp" />
+            android:fontFamily="@font/planewalker"
+            android:textStyle="bold"
+            android:textColor="@color/textColor"
+            android:textSize="30sp" />
 
     </LinearLayout>
 

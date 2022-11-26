@@ -1,20 +1,33 @@
 package com.example.mtgcollection;
 
 
+import static com.example.mtgcollection.CardDatabaseHelper.KEY_ID;
+import static com.example.mtgcollection.CardDatabaseHelper.KEY_IMAGE;
+import static com.example.mtgcollection.CardDatabaseHelper.KEY_NAME;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 
 
 public class AllCards extends AppCompatActivity {
 
     CardDatabaseManager cdm = new CardDatabaseManager(this);
+    byte [] image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +39,23 @@ public class AllCards extends AppCompatActivity {
         cdm.open();
         Cursor cards = cdm.getAllCards();
 
-            cards.moveToFirst();
-            CardCursorAdapter cca = new CardCursorAdapter(this, cards);
-            lv_cards.setAdapter(cca);
+        cards.moveToFirst();
+        CardCursorAdapter cca = new CardCursorAdapter(this, cards);
+        lv_cards.setAdapter(cca);
+
+        lv_cards.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent onCard = new Intent(AllCards.this, CardClicked.class);
+                cards.move(position);
+                String name = cards.getString(cards.getColumnIndexOrThrow(KEY_NAME));
+                byte[] image = cards.getBlob(cards.getColumnIndexOrThrow(KEY_IMAGE));
+                onCard.putExtra("id", id);
+                onCard.putExtra("name", name);
+                onCard.putExtra("image", image);
+                startActivity(onCard);
+            }
+        });
 
         cdm.close();
 

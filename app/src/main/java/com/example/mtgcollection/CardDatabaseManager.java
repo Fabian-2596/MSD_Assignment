@@ -136,10 +136,10 @@ import android.util.Log;
                     new String[] { String.valueOf(card.getId()) });
         }
 
-        public void deleteCard(Card card) {
+        public void deleteCard(long id) {
 
             database.delete(TABLE_CARD, KEY_ID + " = ?",
-                    new String[] { String.valueOf(card.getId()) });
+                    new String[] { String.valueOf(id) });
             database.close();
         }
 

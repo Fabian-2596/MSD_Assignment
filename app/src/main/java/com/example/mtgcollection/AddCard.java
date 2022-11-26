@@ -36,6 +36,7 @@ public class AddCard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_card);
+
         Intent cardList = new Intent(AddCard.this, AllCards.class);
         EditText et_name = findViewById(R.id.et_name);
         EditText et_cost = findViewById(R.id.et_cost);

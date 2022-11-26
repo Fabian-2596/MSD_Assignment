@@ -32,6 +32,10 @@
             android:name=".AddCard"
             android:label="add card">
         </activity>
+        <activity
+            android:name=".CardClicked"
+            android:label="card clicked">
+        </activity>
     </application>
 
 </manifest>
