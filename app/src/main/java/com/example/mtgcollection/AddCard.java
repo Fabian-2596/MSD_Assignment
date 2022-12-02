@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -17,6 +18,8 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatSpinner;
@@ -35,6 +38,8 @@ public class AddCard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_card);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         Intent cardList = new Intent(AddCard.this, AllCards.class);
         EditText et_name = findViewById(R.id.et_name);
@@ -45,7 +50,7 @@ public class AddCard extends AppCompatActivity {
         AppCompatSpinner spn_color = findViewById(R.id.spinner_color);
         AppCompatButton btn_image = findViewById(R.id.btn_picture);
         AppCompatButton btn_submit = findViewById(R.id.btn_submit);
-        AppCompatButton btn_return = findViewById(R.id.btn_return);
+        ImageButton btn_return = findViewById(R.id.btn_return);
 
         List<String> types = Arrays.stream(Card.type.values())
                 .map(Enum::toString)
@@ -113,11 +118,10 @@ public class AddCard extends AppCompatActivity {
                     cdm.open();
                     cdm.addCard(card);
                     cdm.close();
-
-                    startActivity(cardList);
-
                     Toast success = Toast.makeText(getApplicationContext(), et_name.getText().toString() + " added", Toast.LENGTH_SHORT);
                     success.show();
+                    startActivity(cardList);
+                    finish();
                 }
                 else {
                     Toast fail = Toast.makeText(getApplicationContext(),  "Check if everything is filled in", Toast.LENGTH_SHORT);

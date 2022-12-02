@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -20,8 +21,12 @@ public class CardClicked extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.on_card);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
+        Intent cardList = new Intent(CardClicked.this, AllCards.class);
         CardDatabaseManager cdm = new CardDatabaseManager(this);
+
 
         Intent i = getIntent();
         long id = i.getLongExtra("id", 0);
@@ -44,8 +49,6 @@ public class CardClicked extends AppCompatActivity {
                 cdm.open();
                 cdm.deleteCard(id);
                 cdm.close();
-                Intent cardList = new Intent(CardClicked.this, AllCards.class);
-                startActivity(cardList);
                 finish();
             }
         });

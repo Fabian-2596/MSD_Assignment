@@ -78,6 +78,4 @@ public class CardCursorAdapter extends CursorAdapter {
         tv_color.setText(color);
         tv_power.setText(power + "/" + toughness);
     }
-
-
 }

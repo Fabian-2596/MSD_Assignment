@@ -2,8 +2,10 @@
 package com.example.mtgcollection;
 
 
+import static com.example.mtgcollection.CardDatabaseHelper.KEY_CARDID;
 import static com.example.mtgcollection.CardDatabaseHelper.KEY_COLOR;
 import static com.example.mtgcollection.CardDatabaseHelper.KEY_COST;
+import static com.example.mtgcollection.CardDatabaseHelper.KEY_DECKID;
 import static com.example.mtgcollection.CardDatabaseHelper.KEY_ID;
 import static com.example.mtgcollection.CardDatabaseHelper.KEY_IMAGE;
 import static com.example.mtgcollection.CardDatabaseHelper.KEY_NAME;
@@ -68,38 +70,12 @@ import android.util.Log;
             database.insert(TABLE_DECK, null, values);
         }
 
-        void addCardtoDeck(int cardId, int deckId) {
+        void addCardtoDeck(long cardId, long deckId) {
             ContentValues values = new ContentValues();
-            values.put(KEY_ID, cardId);
-            values.put(KEY_ID, deckId);
+            values.put(KEY_CARDID, cardId);
+            values.put(KEY_DECKID, deckId);
 
             database.insert(TABLE_INDECK, null, values);
-        }
-
-
-        Card getCard(int id) {
-
-            Cursor cursor = database.query(TABLE_CARD, new String[] { KEY_ID,
-                            KEY_NAME, KEY_COST, KEY_POWER, KEY_TOUGHNESS, KEY_TYPE, KEY_COLOR, KEY_IMAGE }, KEY_ID + "=?",
-                    new String[] { String.valueOf(id) }, null, null, null, null);
-            if (cursor != null)
-                cursor.moveToFirst();
-
-            Card card = new Card(
-                    cursor.getString(1), cursor.getInt(2), cursor.getInt(3), cursor.getInt(4), cursor.getString(5), cursor.getString(6), cursor.getBlob(7));
-            return card;
-        }
-
-        Deck getDeck(int id) {
-            Cursor cursor = database.query(TABLE_DECK, new String[] { KEY_ID,
-                            KEY_NAME}, KEY_ID + "=?",
-                    new String[] { String.valueOf(id) }, null, null, null, null);
-            if (cursor != null)
-                cursor.moveToFirst();
-
-            Deck deck = new Deck(
-                    cursor.getString(1));
-            return deck;
         }
 
         public Cursor getAllCards() {
@@ -114,51 +90,26 @@ import android.util.Log;
             return deckList;
         }
 
-        public Cursor getCardsinDeck(int deckId) {
-            String selectQuery = "SELECT * FROM" + TABLE_DECK + " WHERE " + KEY_ID + " = " + String.valueOf(deckId);
+        public Cursor getCardsinDeck(long deckId) {
+            String id = String.valueOf(deckId);
+            String selectQuery = "SELECT * FROM " + TABLE_INDECK + " INNER JOIN " + TABLE_CARD + " ON " + TABLE_INDECK + "." + KEY_CARDID + " = " + TABLE_CARD + "." + KEY_ID + " WHERE " + KEY_DECKID + " = " + id;
             Cursor inDeckList = database.rawQuery(selectQuery, null);
             return inDeckList;
         }
 
-
-        public int updateCard(Card card) {
-
-            ContentValues values = new ContentValues();
-            values.put(KEY_NAME, card.getName());
-            values.put(KEY_COST, card.getCost());
-            values.put(KEY_POWER, card.getPower());
-            values.put(KEY_TOUGHNESS, card.getToughness());
-            values.put(KEY_TYPE, card.getType());
-            values.put(KEY_COLOR, card.getColor());
-            values.put(KEY_IMAGE, card.getImage());
-
-            return database.update(TABLE_CARD, values, KEY_ID + " = ?",
-                    new String[] { String.valueOf(card.getId()) });
-        }
-
         public void deleteCard(long id) {
-
             database.delete(TABLE_CARD, KEY_ID + " = ?",
+                    new String[] { String.valueOf(id) });
+            database.delete(TABLE_INDECK, KEY_CARDID + " = ?",
                     new String[] { String.valueOf(id) });
             database.close();
         }
 
         public void deleteDeck(long id) {
-
             database.delete(TABLE_DECK, KEY_ID + " = ?",
                     new String[] { String.valueOf(id) });
+            database.delete(TABLE_INDECK, KEY_DECKID + " = ?", new String[] { String.valueOf(id)});
             database.close();
         }
-
-        public int getCardCount() {
-            String countQuery = "SELECT  * FROM " + TABLE_CARD;
-            Cursor cursor = database.rawQuery(countQuery, null);
-            cursor.close();
-
-            // return count
-            return cursor.getCount();
-        }
-
-
     }
 

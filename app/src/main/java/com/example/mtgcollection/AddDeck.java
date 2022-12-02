@@ -18,6 +18,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatSpinner;
@@ -36,7 +37,10 @@ public class AddDeck extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_deck);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
+        Intent decks = new Intent(AddDeck.this, AllDecks.class);
         EditText et_name = findViewById(R.id.et_name);
         Button btn_submit = findViewById(R.id.btn_submit);
         ImageButton btn_return = findViewById(R.id.btn_return);

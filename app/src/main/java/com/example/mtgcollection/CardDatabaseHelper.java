@@ -29,7 +29,8 @@ public class CardDatabaseHelper extends SQLiteOpenHelper
     public static final String TABLE_DECK = "deck";
 
     public static final String TABLE_INDECK = "indeck";
-    private static final String KEY_DECKID = "deckid";
+    public static final String KEY_DECKID = "deckid";
+    public static final String KEY_CARDID = "cardid";
 
 
     public CardDatabaseHelper(Context context) {
@@ -57,7 +58,8 @@ public class CardDatabaseHelper extends SQLiteOpenHelper
         db.execSQL(CREATE_MTGC_TABLE_DECK);
 
         String CREATE_MTGC_TABLE_INDECK = "CREATE TABLE " + TABLE_INDECK + "("
-                + KEY_ID + " INTEGER PRIMARY KEY,"
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_CARDID + " INTEGER,"
                 + KEY_DECKID + " INTEGER,"
                 + "FOREIGN KEY ("+KEY_ID+") REFERENCES "+TABLE_CARD+"("+KEY_ID+"),"
                 + "FOREIGN KEY ("+KEY_DECKID+") REFERENCES "+TABLE_DECK+"("+KEY_ID+")"

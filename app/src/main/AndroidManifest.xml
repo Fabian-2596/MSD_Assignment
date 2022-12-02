@@ -40,7 +40,12 @@
         <activity
             android:name=".AddDeck"
             android:label="add deck"></activity>
-
+        <activity
+            android:name=".DeckClicked"
+            android:label="deck clicked"></activity>
+        <activity
+            android:name=".AddCardDeck"
+            android:label="addcarddeck"></activity>
     </application>
 
 </manifest>
