@@ -18,7 +18,6 @@ import androidx.appcompat.widget.AppCompatButton;
 
 public class AllDecks extends AppCompatActivity {
 
-    int REQUEST_CODE = 200;
     CardDatabaseManager cdm;
     ListView lv_decks;
     Cursor decks;
@@ -41,7 +40,7 @@ public class AllDecks extends AppCompatActivity {
                 String name = deck.getString(deck.getColumnIndexOrThrow(KEY_NAME));
                 onDeck.putExtra("id", id);
                 onDeck.putExtra("name", name);
-                startActivityForResult(onDeck, REQUEST_CODE);
+                startActivityForResult(onDeck, 42);
             }
         });
 
@@ -59,7 +58,7 @@ public class AllDecks extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent addDeck = new Intent(AllDecks.this, AddDeck.class);
-                startActivityForResult(addDeck, REQUEST_CODE);
+                startActivityForResult(addDeck, 42);
             }
         });
     }

@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryColor"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -16,7 +15,6 @@
             android:layout_centerInParent="true"
             android:fontFamily="@font/planewalker"
             android:text="@string/add_card"
-            android:textColor="@color/textColor"
             android:textSize="40sp"
             android:textStyle="bold" />
 
@@ -61,7 +59,6 @@
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/planewalker"
                 android:text="@string/name"
-                android:textColor="@color/textColor"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -72,7 +69,6 @@
                 android:layout_below="@+id/tv_name"
                 android:layout_centerInParent="true"
                 android:layout_marginHorizontal="30dp"
-                android:background="@drawable/input_field"
                 android:elevation="10dp"
                 android:fontFamily="@font/planewalker"
                 android:hint="Enter name"
@@ -91,7 +87,6 @@
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/planewalker"
                 android:text="@string/mana_cost"
-                android:textColor="@color/textColor"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -102,7 +97,6 @@
                 android:layout_below="@+id/tv_cost"
                 android:layout_centerInParent="true"
                 android:layout_marginHorizontal="30dp"
-                android:background="@drawable/input_field"
                 android:elevation="10dp"
                 android:fontFamily="@font/planewalker"
                 android:hint="Enter mana cost"
@@ -134,7 +128,6 @@
                         android:layout_marginLeft="5dp"
                         android:fontFamily="@font/planewalker"
                         android:text="Power"
-                        android:textColor="@color/textColor"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -145,7 +138,6 @@
                         android:layout_below="@+id/tv_power"
                         android:layout_centerVertical="true"
                         android:layout_marginBottom="15dp"
-                        android:background="@drawable/input_field"
                         android:elevation="10dp"
                         android:fontFamily="@font/planewalker"
                         android:hint="Enter power"
@@ -170,7 +162,6 @@
                         android:layout_marginLeft="5dp"
                         android:fontFamily="@font/planewalker"
                         android:text="Toughness"
-                        android:textColor="@color/textColor"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -181,7 +172,6 @@
                         android:layout_below="@+id/tv_toughness"
                         android:layout_centerInParent="true"
                         android:layout_marginBottom="15dp"
-                        android:background="@drawable/input_field"
                         android:elevation="10dp"
                         android:fontFamily="@font/planewalker"
                         android:hint="Enter toughness"
@@ -205,7 +195,6 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/planewalker"
                 android:text="Type"
-                android:textColor="@color/textColor"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -230,7 +219,6 @@
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/planewalker"
                 android:text="Color"
-                android:textColor="@color/textColor"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 

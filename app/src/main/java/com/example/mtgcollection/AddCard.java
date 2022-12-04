@@ -68,7 +68,7 @@ public class AddCard extends AppCompatActivity {
         colorAdapter.setDropDownViewResource(R.layout.spinner_item);
         spn_color.setAdapter(colorAdapter);
 
-        //Image picker from https://stackoverflow.com/questions/38352148/get-image-from-the-gallery-and-show-in-imageview
+        //Reference from https://stackoverflow.com/questions/38352148/get-image-from-the-gallery-and-show-in-imageview
         ActivityResultLauncher<Intent> imagePickerActivityResult = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
                     @Override
@@ -100,6 +100,7 @@ public class AddCard extends AppCompatActivity {
                 imagePickerActivityResult.launch(photoPickerIntent);
             }
         });
+        //Reference complete
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,11 +109,10 @@ public class AddCard extends AppCompatActivity {
                 String type = spn_type.getSelectedItem().toString();
                 String color = spn_color.getSelectedItem().toString();
 
-                if(name != null && et_cost.getText().toString() != null && et_power.getText().toString() != null && et_toughness.getText().toString() != null && image != null) {
+                if(!name.matches("") && !et_cost.getText().toString().matches("") && !et_power.getText().toString().matches("") && !et_toughness.getText().toString().matches("") && image != null) {
                     int cost = Integer.parseInt(et_cost.getText().toString());
                     int power = Integer.parseInt(et_power.getText().toString());
                     int toughness = Integer.parseInt(et_toughness.getText().toString());
-
                     Card card = new Card(name, cost, power, toughness, type, color, image);
 
                     cdm.open();
@@ -133,7 +133,6 @@ public class AddCard extends AppCompatActivity {
 
         btn_return.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(cardList);
                 finish();
             }
         });

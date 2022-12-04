@@ -8,6 +8,6 @@
     android:textColor="@color/black"
     android:padding="10dp"
     android:background="@drawable/input_field"
-    android:fontFamily="@font/magic"
+    android:fontFamily="@font/planewalker"
     android:textStyle="bold"
     />

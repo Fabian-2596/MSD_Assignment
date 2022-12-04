@@ -18,13 +18,12 @@ import java.util.List;
 
 public class DeckClicked extends AppCompatActivity {
 
-    int REQUEST_CODE = 300;
     CardDatabaseManager cdm;
     Cursor cardInDeck;
     CardCursorAdapter cca;
     ListView lv_cards;
-
     long id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +46,7 @@ public class DeckClicked extends AppCompatActivity {
             public void onClick(View view) {
                 Intent addCard = new Intent(DeckClicked.this, AddCardDeck.class);
                 addCard.putExtra("deckId", id);
-                startActivityForResult(addCard, REQUEST_CODE);
+                startActivityForResult(addCard, 42);
             }
         });
 
